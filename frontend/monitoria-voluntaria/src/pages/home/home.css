@@ -1,0 +1,212 @@
+:root {
+    --color-background: #fefefe;
+    --color-selected: #e1faec;
+    --color-selected-border: #34cb79;
+    --color-primary-lighter1: #c6fffd;
+    --color-primary-lighter: #b8f0ee;
+    --color-primary-light: #62c2b0;
+    --color-primary: #5abfad;
+    --color-primary-dark: #388a96;
+    --color-primary-darker: #02587c;
+    --color-secondary: #6d1fb6;
+    --color-secondary-dark: #6203bb;
+    --color-title-in-primary: #ffffff;
+    --color-text-in-primary: #b6ebdd;
+    --color-text-title: #32264d;
+    --color-text-complement: #233f33;
+    --color-text-base: #61807e;
+    --color-line-in-white: #e6eef0;
+    --color-input-background: #f8f8fc;
+    --color-button-text: #ffffff;
+    --color-box-base: #ffffff;
+    --color-box-footer: #fafafc;
+    --color-small-info: #a1b4ac;
+    font-size: 60%;
+    /* controle das medidas rem */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100vh;
+}
+
+body {
+    background-color: var(--color-primary);
+    padding: 2rem 0;
+    /* background-color: var(--color-primary-lighter); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+}
+
+body,
+button,
+textarea,
+input {
+    font: 500 1.6rem sans-serif;
+    color: var(--color-primary-darker);
+}
+
+.container {
+    color: var(--color-primary-lighter1);
+    width: 70vw;
+    max-width: 700px;
+}
+
+@media (min-width:700px) {
+    :root {
+        font-size: 62.5%;
+    }
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 3.1rem;
+}
+
+.logo-container h2 {
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 3rem;
+    margin-top: .7rem;
+}
+
+.logoComp {
+    width: 100%;
+}
+
+.hero-image {
+    width: 100%;
+}
+
+.cadastro {
+    text-decoration: none;
+    font: 500 1.4rem sans-serif;
+    letter-spacing: .2rem;
+    color: var(--color-secondary-dark);
+    transition: color .2s;
+    overflow: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    margin-top: 15rem;
+}
+
+.cadastro:hover {
+    color: var(--color-button-text);
+}
+
+.page-landing-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---------------------- BUTTONS ------------------------------ */
+
+.button-material {
+    height: 4rem;
+}
+
+.button-monitoria {
+    height: 5rem;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    margin: 3.5rem 0;
+}
+
+.buttons-container .material {
+    margin-right: 3rem;
+}
+
+.buttons-container img {
+    margin-right: 1rem;
+}
+
+.buttons-container a {
+    width: 20rem;
+    height: 8rem;
+    border-radius: 2rem;
+    background-color: var(--color-secondary-dark);
+    color: var(--color-button-text);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+
+
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .25s;
+}
+
+.buttons-container a:hover {
+    transform: translateY(-5px) translateX(1px);
+    box-shadow: 0rem .5rem 1rem var(--color-primary-darker);
+}
+
+.buttons-container a:active {
+    transform: translateY(0) translateX(0);
+    box-shadow: 0rem 0rem 0rem var(--color-primary-lighter1);
+}
+
+@media (max-width:699px) {
+    :root {
+        font-size: 40%;
+    }
+}
+
+
+/* ---------------------- MEDIA ------------------------------ */
+@media (min-width:1100px) {
+    .container {
+        max-width: 1100px;
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        grid-template-rows: 350px 1fr 5px;
+        grid-template-areas:
+            "logoName image"
+            "button image"
+            "cadastro cadastro";
+        gap: 80px;
+    }
+
+    .logo-container {
+        grid-area: logoName;
+        align-self: center;
+    }
+
+    .logo-container h2 {
+        font-size: 2.5rem;
+        margin-top: 5rem;
+    }
+
+    .logo-container img {
+        height: 100%;
+    }
+
+    .hero-image {
+        grid-area: image;
+        align-self: center;
+    }
+
+    .buttons-container {
+        grid-area: button;
+        justify-content: flex-start;
+        margin-top: -80px;
+    }
+
+    .cadastro {
+        grid-area: cadastro;
+        margin-top: 2rem;
+    }
+}
