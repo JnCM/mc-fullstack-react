@@ -1,15 +1,17 @@
 import React from 'react';
+import { renderToString } from 'react-dom/server';
 import './cadastro.css';
 import './header.css';
 import './forms.css';
 import logoComp4 from '../../assets/images/logoComp4.svg';
 import back from '../../assets/images/icons/back.svg';
 import warning from '../../assets/images/icons/warning.svg';
-import add from './script_cadastro';
 
 const Cadastro = () => {
     var listaDisciplinas = ["Programação", "Matemática Discreta", "Introdução à Ciência da Computação", "Física I", "Cálculo Diferencial e Integral I", "Algoritmos e Estrutura de Dados I", "Introdução aos Sistemas Lógicos Digitais", "Inglês I", "Geometria Analítica e Álgebra Linear", "Cálculo Diferencial e Integral II", "Algoritmos e Estrutura de Dados II", "Organização de Computadores I", "Física III", "Laboratório de Física Elétrica", "Iniciação à Estatística", "Cálculo Diferencial e Integral III", "Banco de Dados", "Programação Orientada a Objetos", "Projeto e Análise de Algoritmos", "Teoria e Modelo de Grafos", "Organização de Computadores II", "Português Instrumental I", "Teoria Geral da Administração", "Empreendedorismo e Inovação I", "Gestão da Diversidade nas Organizações", "Fundamentos da Teoria da Computação", "Engenharia de Software I", "Sistemas Operacionais", "Redes de Computadores", "Cálculo Numérico", "Economia I", "Pesquisa Operacional I", "Engenharia de Software II", "Linguagens de Programação", "Sistemas Embarcados", "Atividades Complementares II", "Projeto de Sistemas para Web", "Sistemas Distribuídos e Paralelos", "Compiladores", "Projeto Orientado em Computação I", "Matemática Financeira", "Computadores e Sociedade", "Projeto Orientado em Computação II"];
     var listaHtmls = [];
+    var count = 0;
+
     listaDisciplinas.sort((a,b) => {
         if (a < b)
             return -1;
@@ -17,6 +19,7 @@ const Cadastro = () => {
             return 1;
         return 0;
     });
+
     for (let index = 0; index < listaDisciplinas.length; index++) {
         listaHtmls.push(
             <div key={index}>
@@ -27,6 +30,45 @@ const Cadastro = () => {
             </div>
         );
     }
+
+    function addHorario(){
+        var divHorario = document.getElementById("schedule-items");
+        divHorario.innerHTML += 
+            renderToString(<div className="schedule-item">
+                <div className="select-block">
+                    <label htmlFor={"weekday" + (count+1).toString()}>Dia da semana</label>
+                    <select name={"weekday" + (count+1).toString()} id={"weekday" + (count+1).toString()}>
+                        <option value="">Selecione</option>
+                        <option value="Domingo">Domingo</option>
+                        <option value="Segunda">Segunda</option>
+                        <option value="Terça">Terça</option>
+                        <option value="Quarta">Quarta</option>
+                        <option value="Quinta">Quinta</option>
+                        <option value="Sexta">Sexta</option>
+                        <option value="Sábado">Sábado</option>
+                    </select>
+                </div>
+                <div className="input-block">
+                    <label htmlFor={"time_from" + (count+1).toString()}>Das </label>
+                    <input type="time" name={"time_from" + (count+1).toString()} id={"time_from" + (count+1).toString()}/>
+                </div>
+                <div className="input-block">
+                    <label htmlFor={"time_to" + (count+1).toString()}> até </label>
+                    <input type="time" name={"time_to" + (count+1).toString()} id={"time_to" + (count+1).toString()}/>
+                </div>
+            </div>);
+        count = count + 1;
+    }
+
+    function removeHorario(){
+        console.log(count);
+        if(count > 0){
+            var divHorario = document.getElementById("schedule-items");
+            divHorario.lastChild.remove();
+            count = count - 1;
+        }
+    }
+
     return ( 
         <div className="container2">
             <header className="page-header">
@@ -97,7 +139,8 @@ const Cadastro = () => {
                 </fieldset>
                 <fieldset id="schedule-items">
                     <legend id="legend">Horários disponíveis
-                        <button id="add-time" onClick={add()}>+ Novo Horário</button>
+                        <button id="add-time" onClick={()=> {addHorario()}}>+ Novo Horário</button>
+                        <button id="rem-time" onClick={() => {removeHorario()}}>- Remover Horário</button>
                     </legend>
                     <div className="schedule-item">
                         <div className="select-block">
